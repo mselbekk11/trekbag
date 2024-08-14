@@ -1,10 +1,11 @@
-import { intialItems } from '../lib/constants'
 
 
-export default function ItemList() {
+
+export default function ItemList({ items }) {
+
   return (
     <ul>
-      {intialItems.map((item) => (
+      {items.map((item) => (
         <Item key={item.id} item={item} />
       ))}
     </ul>
@@ -14,11 +15,11 @@ export default function ItemList() {
 function Item({ item }) {
   return (
     <li className="item">
-      
       <label>
-      <input type="checkbox" />
+      <input checked={item.packed} type="checkbox" />
         {item.name}
         </label>
+        <button>❌</button>
       </li>
   )
 }
