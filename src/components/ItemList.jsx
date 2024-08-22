@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import EmptyView from "./EmptyView"
 import Select from "react-select"
+import { useItemsContext } from "../lib/hooks";
 
 const sortingOptions = [
   {
@@ -18,9 +19,10 @@ const sortingOptions = [
 ]
 
 
-export default function ItemList({ items, handleDeleteItem, handleToggleItem }) {
+export default function ItemList() {
 
   const [sortBy, setSortBy] = useState("default");
+  const { items, handleDeleteItem, handleToggleItem} = useItemsContext()
 
   // useMemo is used to memorize the sortedItems array so that it is not recalculated on every render and only when the items or sortBy changes (Performance optimization)
   const sortedItems = useMemo(() => [...items].sort((a, b) => {
