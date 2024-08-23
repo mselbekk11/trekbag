@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import EmptyView from "./EmptyView"
 import Select from "react-select"
-import { useItemsContext } from "../lib/hooks";
+import { useItemsStore } from "../stores/itemsStore";
 
 const sortingOptions = [
   {
@@ -20,9 +20,13 @@ const sortingOptions = [
 
 
 export default function ItemList() {
+  const items = useItemsStore((state) => state.items);
+  const deleteItem = useItemsStore((state) => state.deleteItem);
+  const toggleItem = useItemsStore((state) => state.toggleItem);
 
   const [sortBy, setSortBy] = useState("default");
-  const { items, handleDeleteItem, handleToggleItem} = useItemsContext()
+
+
 
   // useMemo is used to memorize the sortedItems array so that it is not recalculated on every render and only when the items or sortBy changes (Performance optimization)
   const sortedItems = useMemo(() => [...items].sort((a, b) => {
@@ -49,7 +53,7 @@ export default function ItemList() {
     }
 
       {sortedItems.map((item) => (
-        <Item key={item.id} item={item} onDeleteItem={handleDeleteItem} onToggleItem={handleToggleItem}/>
+        <Item key={item.id} item={item} onDeleteItem={deleteItem} onToggleItem={toggleItem}/>
       ))}
     </ul>
   )

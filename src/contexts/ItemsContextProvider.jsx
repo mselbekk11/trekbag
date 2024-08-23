@@ -1,3 +1,7 @@
+// DONT NEED THIS FILE ANYMORE AS USING ZUSTAND FOR STATE MANAGEMENT
+
+
+
 import { createContext, useEffect, useState } from "react";
 import { intialItems } from "../lib/constants";
 
